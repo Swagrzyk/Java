@@ -8,7 +8,7 @@ import java.util.Random;
 import java.util.logging.XMLFormatter;
 
 public class gra extends JPanel implements KeyListener, ActionListener {
-    private int x=300, y=900,wh=75;//ustawienia gracza
+    private int x=300, y=875,wh=75;//ustawienia gracza
     private int speed;
     private int speedwrog;
     private Timer time;//odswierzanie
@@ -49,19 +49,19 @@ public class gra extends JPanel implements KeyListener, ActionListener {
 
         JButton mediumButton = new JButton("średni");
         mediumButton.addActionListener(e -> {
-            speedwrog = 6;
+            speedwrog = 10;
             speed=25;
-            reset();
             frame.dispose();
+            reset();
         });
         panel.add(mediumButton);
 
         JButton hardButton = new JButton("trudny");
         hardButton.addActionListener(e -> {
-            speedwrog = 10;
-            reset();
+            speedwrog = 20;
             speed=50;
             frame.dispose();
+            reset();
         });
         panel.add(hardButton);
 
@@ -98,8 +98,8 @@ public class gra extends JPanel implements KeyListener, ActionListener {
         //wrog
         g.setColor(Color.red);
         g.fillRect(wrogx1,ey,wWroga,szWroga);
-        g.fillRect(wrogx2,ey,wWroga,szWroga);
-        g.fillRect(wrogx3,ey,wWroga,szWroga);
+        g.fillRect(wrogx2,ey,100,100);
+        g.fillRect(wrogx3,ey,100,100);
         //punkty
         g.setColor(Color.yellow);
         setFont(new Font("serif",Font.BOLD,20));
@@ -122,7 +122,7 @@ public class gra extends JPanel implements KeyListener, ActionListener {
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.QUESTION_MESSAGE,
                     null,
-                    new Object[]{"Zagraj ponownie", "Wróć do menu wyboru poziomu trudności"},
+                    new Object[]{"Zagraj ponownie", "Wróć do menu wyboru poziomu trudności","Wyjdz z gry"},
                     "Zagraj ponownie");
 
             // wykonanie wybranego działania
@@ -130,12 +130,14 @@ public class gra extends JPanel implements KeyListener, ActionListener {
                 reset();
             } else if (choice == 1) { // wróć do menu wyboru poziomu trudności
                 chooseDifficult();
+            }else if(choice ==2){
+                System.exit(0);
             }
 
         }
 
-        if (ey == 900) {
-            ey = 10;
+         if (ey == 850) {
+            ey=30;
             wrogx1 = liczba.nextInt(12) * 100;
             wrogx3 = liczba.nextInt(12) * 100;
             wrogx2 = liczba.nextInt(12) * 100;
@@ -154,8 +156,6 @@ public class gra extends JPanel implements KeyListener, ActionListener {
                     x = 0;
                 } else {
                     x -= speed;//porusza sie w lewo
-                    System.out.println(x);
-
                 }
             }
 
@@ -164,7 +164,7 @@ public class gra extends JPanel implements KeyListener, ActionListener {
                     x = 1100;
                 } else {
                     x += speed;//porusza sie w prawo
-                    System.out.println(x);
+
                 }
 
             }
@@ -173,18 +173,15 @@ public class gra extends JPanel implements KeyListener, ActionListener {
             if (y ==15 ) {
                 y = 15;
             } else {
-
                 y -= speed;//porusza sie do tylu
-                System.out.println(y);
             }
         }
         if(e.getKeyCode()==KeyEvent.VK_S){
-            if (y ==475){
-                y=475;
+            if (y ==875){
+                y=875;
             }
                 else{
                     y += speed;//porusza sie do przodu
-                System.out.println(y);
                 }
         }
             if (e.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -197,7 +194,7 @@ public class gra extends JPanel implements KeyListener, ActionListener {
         wrogx1 =liczba.nextInt(12)*100;
         wrogx3 =liczba.nextInt(12)*100;
         wrogx2 =liczba.nextInt(12)*100;
-        x=300;
+        x=600;
         time.start();
     }
 
